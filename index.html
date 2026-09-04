@@ -30,6 +30,7 @@
             overflow-x: hidden;
         }
 
+        /* Վերևի վերնագիրը */
         .header {
             text-align: center;
             margin-top: 10px;
@@ -54,6 +55,7 @@
             text-shadow: 0 0 12px rgba(255, 230, 200, 0.15);
         }
 
+        /* Կենտրոնական բաժանարար գիծը և կլոր լոգոն */
         .divider-container {
             position: absolute;
             top: 0;
@@ -97,6 +99,7 @@
             letter-spacing: 1px;
         }
 
+        /* Լուսանկարների սլայդերների հատվածը */
         .gallery-container {
             width: 100%;
             max-width: 600px;
@@ -134,6 +137,7 @@
             opacity: 1;
         }
 
+        /* Ներքևի երկու սյուներով հատվածը */
         .bottom-section {
             width: 100%;
             max-width: 600px;
@@ -172,6 +176,7 @@
             margin-bottom: 15px;
         }
 
+        /* Կետերը (Pagination dots) */
         .dots {
             display: flex;
             gap: 6px;
@@ -199,33 +204,38 @@
 </head>
 <body>
 
+    <!-- Վերնագիր -->
     <div class="header">
         <div class="subtitle">ը ն տ ա ն ե կ ա ն   ա ր խ ի վ</div>
         <div class="main-title">փոքրիկ պահեր, մեծ<br>սեր</div>
     </div>
 
+    <!-- Կենտրոնական գիծ և լոգո -->
     <div class="divider-container">
         <div class="line"></div>
         <div class="center-circle">Ա & Գ</div>
     </div>
 
+    <!-- Լուսանկարների ցուցադրություն -->
     <div class="gallery-container">
         <!-- Անիի սլայդեր -->
         <div class="slider-box" id="ani-slider" onclick="nextAniImage()">
-            <img src="ani.jpeg" class="active" alt="Անի 1">
-            <img src="ani2.jpeg" alt="Անի 2">
-            <img src="ani3.jpeg" alt="Անի 3">
+            <img src="data:image/jpeg;base64,1" class="active" alt="Անի 1">
+            <img src="data:image/jpeg;base64,2" alt="Անի 2">
+            <img src="data:image/jpeg;base64,3" alt="Անի 3">
         </div>
 
         <!-- Գոռի սլայդեր -->
         <div class="slider-box" id="gor-slider" onclick="nextGorImage()">
-            <img src="gor.jpeg" class="active" alt="Գոռ 1">
-            <img src="gor2.jpeg" alt="Գոռ 2">
-            <img src="gor3.jpeg" alt="Գոռ 3">
+            <img src="data:image/jpeg;base64,4" class="active" alt="Գոռ 1">
+            <img src="data:image/jpeg;base64,5" alt="Գոռ 2">
+            <img src="data:image/jpeg;base64,6" alt="Գոռ 3">
         </div>
     </div>
 
+    <!-- Ներքևի տեքստերը և կետերը -->
     <div class="bottom-section">
+        <!-- Ձախ կողմ (Անի) -->
         <div class="column left">
             <div class="name">Անի</div>
             <div class="meta">ԱՄԱՌ, 2024</div>
@@ -236,6 +246,7 @@
             </div>
         </div>
 
+        <!-- Ոջ կողմ (Գոռ) -->
         <div class="column right">
             <div class="name">Գոռ</div>
             <div class="meta">ՁՄԵՌ, 2024</div>
