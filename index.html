@@ -1,251 +1,288 @@
 <!DOCTYPE html>
 <html lang="hy">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Երկու փոքրիկ աստղեր</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #0a0a0d;
-    --panel: #111114;
-    --gold: #cba158;
-    --gold-soft: rgba(203,161,88,0.35);
-    --gold-dim: rgba(203,161,88,0.14);
-    --text-warm: #f3ede1;
-    --text-dim: #948d7d;
-    --child-a: #cba158;
-    --child-b: #b98a9c;
-  }
-  *{ box-sizing: border-box; margin:0; padding:0; }
-  html,body{ background: var(--bg); height:100%; overflow:hidden; }
-  body{
-    font-family: 'Inter', sans-serif;
-    color: var(--text-warm);
-    position: relative;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ընտանեկան Արխիվ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  .stage{
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-  }
+        body {
+            background: #0a080d;
+            background: radial-gradient(circle at center, #18121d 0%, #08060a 100%);
+            color: #ffffff;
+            font-family: 'Noto Serif Armenian', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-  .panel{
-    position: relative;
-    flex: 1;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-  }
+        .header {
+            text-align: center;
+            margin-top: 10px;
+            z-index: 2;
+        }
 
-  .frame{
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transform: scale(1.08);
-    transition: opacity 2.4s ease, transform 8s ease;
-    filter: saturate(0.85) brightness(0.72);
-  }
-  .frame.active{
-    opacity: 1;
-    transform: scale(1);
-  }
+        .subtitle {
+            font-size: 14px;
+            letter-spacing: 6px;
+            color: #a39ca8;
+            text-transform: lowercase;
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
 
-  .panel::after{
-    content:"";
-    position:absolute; inset:0;
-    background: linear-gradient(to top, rgba(6,6,8,0.92) 0%, rgba(6,6,8,0.35) 45%, rgba(6,6,8,0.55) 100%);
-    pointer-events: none;
-  }
+        .main-title {
+            font-size: 28px;
+            font-weight: 400;
+            font-style: italic;
+            color: #f1e7d8;
+            line-height: 1.4;
+            text-shadow: 0 0 12px rgba(255, 230, 200, 0.15);
+        }
 
-  .panel-left .frame{ background-color:#3a2f21; }
-  .panel-right .frame{ background-color:#2e2530; }
+        .divider-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
 
-  .caption{
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding-bottom: 9vh;
-    width: 100%;
-  }
-  .child-name{
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-size: 34px;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-  }
-  .panel-left .child-name{ color: var(--child-a); }
-  .panel-right .child-name{ color: var(--child-b); }
+        .line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(212, 175, 55, 0.3) 30%, 
+                rgba(212, 175, 55, 0.6) 50%, 
+                rgba(212, 175, 55, 0.3) 70%, 
+                transparent 100%);
+        }
 
-  .photo-label{
-    font-size: 12px;
-    color: var(--text-dim);
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    min-height: 16px;
-  }
+        .center-circle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #120e17;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25), inset 0 0 10px rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
-  /* center divider */
-  .divider{
-    position: absolute;
-    top: 0; bottom: 0; left: 50%;
-    width: 1px;
-    transform: translateX(-50%);
-    background: linear-gradient(to bottom,
-      rgba(203,161,88,0) 0%,
-      var(--gold-soft) 40%,
-      var(--gold-soft) 60%,
-      rgba(203,161,88,0) 100%);
-    z-index: 5;
-    box-shadow: 0 0 24px 2px var(--gold-dim);
-  }
+        .gallery-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            z-index: 2;
+        }
 
-  .monogram{
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 6;
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(20,18,14,0.95) 0%, rgba(10,10,12,0.98) 70%);
-    border: 1px solid var(--gold-soft);
-    box-shadow: 0 0 30px 6px var(--gold-dim), inset 0 0 12px rgba(203,161,88,0.15);
-    display:flex; align-items:center; justify-content:center;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 20px;
-    color: var(--gold);
-  }
+        .slider-box {
+            width: 44%;
+            aspect-ratio: 3/4;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+        }
 
-  header.site-title{
-    position: absolute;
-    top: 6vh; left: 50%;
-    transform: translateX(-50%);
-    z-index: 6;
-    text-align: center;
-    pointer-events: none;
-  }
-  header.site-title .eyebrow{
-    font-size: 11px;
-    letter-spacing: 0.32em;
-    color: var(--text-dim);
-    font-weight: 300;
-  }
-  header.site-title h1{
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 22px;
-    color: var(--text-warm);
-    margin-top: 4px;
-    text-shadow: 0 0 18px var(--gold-dim);
-  }
+        .slider-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            border-radius: 12px;
+        }
 
-  .progress-dots{
-    position: absolute;
-    bottom: 4vh;
-    z-index: 6;
-    display:flex; gap:6px;
-  }
-  .panel-left .progress-dots{ left: 50%; transform: translateX(-100%) translateX(-40px); }
-  .panel-right .progress-dots{ right: 50%; transform: translateX(100%) translateX(40px); }
-  .dot{
-    width: 4px; height: 4px; border-radius: 50%;
-    background: rgba(255,255,255,0.18);
-    transition: background 0.6s ease, box-shadow 0.6s ease;
-  }
-  .dot.on{
-    background: var(--gold);
-    box-shadow: 0 0 6px 1px var(--gold-dim);
-  }
+        .slider-box img.active {
+            opacity: 1;
+        }
 
-  @media (max-width: 720px){
-    .child-name{ font-size: 26px; }
-    header.site-title h1{ font-size: 18px; }
-    .monogram{ width: 52px; height: 52px; font-size: 16px; }
-  }
-</style>
+        .bottom-section {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .left .name {
+            color: #d4af37;
+        }
+
+        .right .name {
+            color: #d89696;
+        }
+
+        .meta {
+            font-size: 13px;
+            color: #8c8594;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #3a3342;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .left .dot.active {
+            background-color: #d4af37;
+            transform: scale(1.3);
+        }
+
+        .right .dot.active {
+            background-color: #d89696;
+            transform: scale(1.3);
+        }
+    </style>
 </head>
 <body>
 
-<header class="site-title">
-  <div class="eyebrow">ընտանեկան արխիվ</div>
-  <h1>փոքրիկ պահեր, մեծ սեր</h1>
-</header>
-
-<div class="stage">
-  <div class="panel panel-left" id="panelA">
-    <div class="frame" id="frameA0" style="background-image:linear-gradient(160deg,#4a3823,#221a10);"></div>
-    <div class="frame" id="frameA1" style="background-image:linear-gradient(200deg,#5a4426,#241c10);"></div>
-    <div class="frame" id="frameA2" style="background-image:linear-gradient(120deg,#3f3018,#1c150c);"></div>
-    <div class="caption">
-      <div class="child-name">Անի</div>
-      <div class="photo-label" id="labelA">Ամառ, 2024</div>
-      <div class="progress-dots" id="dotsA"></div>
+    <div class="header">
+        <div class="subtitle">ը ն տ ա ն ե կ ա ն   ա ր խ ի վ</div>
+        <div class="main-title">փոքրիկ պահեր, մեծ<br>սեր</div>
     </div>
-  </div>
 
-  <div class="panel panel-right" id="panelB">
-    <div class="frame" id="frameB0" style="background-image:linear-gradient(160deg,#3d2f3d,#1a1420);"></div>
-    <div class="frame" id="frameB1" style="background-image:linear-gradient(200deg,#4a3648,#1e1622);"></div>
-    <div class="frame" id="frameB2" style="background-image:linear-gradient(120deg,#332638,#16121a);"></div>
-    <div class="caption">
-      <div class="child-name">Գոռ</div>
-      <div class="photo-label" id="labelB">Ձմեռ, 2024</div>
-      <div class="progress-dots" id="dotsB"></div>
+    <div class="divider-container">
+        <div class="line"></div>
+        <div class="center-circle">Ա & Գ</div>
     </div>
-  </div>
-</div>
 
-<div class="divider"></div>
-<div class="monogram">Ա&amp;Գ</div>
+    <div class="gallery-container">
+        <!-- Անիի սլայդեր -->
+        <div class="slider-box" id="ani-slider" onclick="nextAniImage()">
+            <img src="ani.jpeg" class="active" alt="Անի 1">
+            <img src="ani2.jpeg" alt="Անի 2">
+            <img src="ani3.jpeg" alt="Անի 3">
+        </div>
 
-<script>
-  const labelsA = ["Ամառ, 2024", "Ծննդյան օր", "Ծովափ"];
-  const labelsB = ["Ձմեռ, 2024", "Առաջին քայլեր", "Այգում"];
+        <!-- Գոռի սլայդեր -->
+        <div class="slider-box" id="gor-slider" onclick="nextGorImage()">
+            <img src="gor.jpeg" class="active" alt="Գոռ 1">
+            <img src="gor2.jpeg" alt="Գոռ 2">
+            <img src="gor3.jpeg" alt="Գոռ 3">
+        </div>
+    </div>
 
-  function setupDots(containerId, count){
-    const el = document.getElementById(containerId);
-    for(let i=0;i<count;i++){
-      const d = document.createElement('div');
-      d.className = 'dot' + (i===0 ? ' on' : '');
-      d.id = containerId + '-' + i;
-      el.appendChild(d);
-    }
-  }
-  setupDots('dotsA', 3);
-  setupDots('dotsB', 3);
+    <div class="bottom-section">
+        <div class="column left">
+            <div class="name">Անի</div>
+            <div class="meta">ԱՄԱՌ, 2024</div>
+            <div class="dots" id="ani-dots">
+                <div class="dot active" onclick="setAniImage(0)"></div>
+                <div class="dot" onclick="setAniImage(1)"></div>
+                <div class="dot" onclick="setAniImage(2)"></div>
+            </div>
+        </div>
 
-  function cycle(prefix, labels, dotsId, interval, offset){
-    let idx = 0;
-    const frames = [0,1,2].map(i => document.getElementById(prefix + i));
-    const label = document.getElementById('label' + prefix.slice(-1));
-    frames[0].classList.add('active');
+        <div class="column right">
+            <div class="name">Գոռ</div>
+            <div class="meta">ՁՄԵՌ, 2024</div>
+            <div class="dots" id="gor-dots">
+                <div class="dot active" onclick="setGorImage(0)"></div>
+                <div class="dot" onclick="setGorImage(1)"></div>
+                <div class="dot" onclick="setGorImage(2)"></div>
+            </div>
+        </div>
+    </div>
 
-    setTimeout(() => {
-      setInterval(() => {
-        frames[idx].classList.remove('active');
-        document.getElementById(dotsId + '-' + idx).classList.remove('on');
-        idx = (idx + 1) % frames.length;
-        frames[idx].classList.add('active');
-        document.getElementById(dotsId + '-' + idx).classList.add('on');
-        label.textContent = labels[idx];
-      }, interval);
-    }, offset);
-  }
+    <script>
+        let aniIndex = 0;
+        let gorIndex = 0;
 
-  cycle('frameA', labelsA, 'dotsA', 5000, 0);
-  cycle('frameB', labelsB, 'dotsB', 5000, 1600);
-</script>
+        const aniImages = document.querySelectorAll('#ani-slider img');
+        const aniDots = document.querySelectorAll('#ani-dots .dot');
+
+        const gorImages = document.querySelectorAll('#gor-slider img');
+        const gorDots = document.querySelectorAll('#gor-dots .dot');
+
+        function setAniImage(index) {
+            aniImages[aniIndex].classList.remove('active');
+            aniDots[aniIndex].classList.remove('active');
+            aniIndex = index;
+            aniImages[aniIndex].classList.add('active');
+            aniDots[aniIndex].classList.add('active');
+        }
+
+        function nextAniImage() {
+            let nextIndex = (aniIndex + 1) % aniImages.length;
+            setAniImage(nextIndex);
+        }
+
+        function setGorImage(index) {
+            gorImages[gorIndex].classList.remove('active');
+            gorDots[gorIndex].classList.remove('active');
+            gorIndex = index;
+            gorImages[gorIndex].classList.add('active');
+            gorDots[gorIndex].classList.add('active');
+        }
+
+        function nextGorImage() {
+            let nextIndex = (gorIndex + 1) % gorImages.length;
+            setGorImage(nextIndex);
+        }
+    </script>
 
 </body>
 </html>
