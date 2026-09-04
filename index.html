@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ընտանեկան Արխիվ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a080d;
+            background: radial-gradient(circle at center, #18121d 0%, #08060a 100%);
+            color: #ffffff;
+            font-family: 'Noto Serif Armenian', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Վերևի վերնագիրը */
+        .header {
+            text-align: center;
+            margin-top: 10px;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            letter-spacing: 6px;
+            color: #a39ca8;
+            text-transform: lowercase;
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+
+        .main-title {
+            font-size: 28px;
+            font-weight: 400;
+            font-style: italic;
+            color: #f1e7d8;
+            line-height: 1.4;
+            text-shadow: 0 0 12px rgba(255, 230, 200, 0.15);
+        }
+
+        /* Կենտրոնական բաժանարար գիծը և կլոր լոգոն */
+        .divider-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(212, 175, 55, 0.3) 30%, 
+                rgba(212, 175, 55, 0.6) 50%, 
+                rgba(212, 175, 55, 0.3) 70%, 
+                transparent 100%);
+        }
+
+        .center-circle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #120e17;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25), inset 0 0 10px rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Լուսանկարների սլայդերների հատվածը */
+        .gallery-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            z-index: 2;
+        }
+
+        .slider-box {
+            width: 44%;
+            aspect-ratio: 3/4;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+        }
+
+        .slider-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            border-radius: 12px;
+        }
+
+        .slider-box img.active {
+            opacity: 1;
+        }
+
+        /* Ներքևի երկու սյուներով հատվածը */
+        .bottom-section {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .left .name {
+            color: #d4af37;
+        }
+
+        .right .name {
+            color: #d89696;
+        }
+
+        .meta {
+            font-size: 13px;
+            color: #8c8594;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        /* Կետերը (Pagination dots) */
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #3a3342;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .left .dot.active {
+            background-color: #d4af37;
+            transform: scale(1.3);
+        }
+
+        .right .dot.active {
+            background-color: #d89696;
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Վերնագիր -->
+    <div class="header">
+        <div class="subtitle">ը ն տ ա ն ե կ ա ն   ա ր խ ի վ</div>
+        <div class="main-title">փոքրիկ պահեր, մեծ<br>սեր</div>
+    </div>
+
+    <!-- Կենտրոնական գիծ և լոգո -->
+    <div class="divider-container">
+        <div class="line"></div>
+        <div class="center-circle">Ա & Գ</div>
+    </div>
+
+    <!-- Լուսանկարների ցուցադրություն -->
+    <div class="gallery-container">
+        <!-- Անիի սլայդեր -->
+        <div class="slider-box" id="ani-slider" onclick="nextAniImage()">
+            <img src="ani1.jpg" class="active" alt="Անի 1">
+            <img src="ani2.jpg" alt="Անի 2">
+            <img src="ani3.jpg" alt="Անի 3">
+        </div>
+
+        <!-- Գոռի սլայդեր -->
+        <div class="slider-box" id="gor-slider" onclick="nextGorImage()">
+            <img src="gor1.jpg" class="active" alt="Գոռ 1">
+            <img src="gor2.jpg" alt="Գոռ 2">
+            <img src="gor3.jpg" alt="Գոռ 3">
+        </div>
+    </div>
+
+    <!-- Ներքևի տեքստերը և կետերը -->
+    <div class="bottom-section">
+        <!-- Ձախ կողմ (Անի) -->
+        <div class="column left">
+            <div class="name">Անի</div>
+            <div class="meta">ԱՄԱՌ, 2024</div>
+            <div class="dots" id="ani-dots">
+                <div class="dot active" onclick="setAniImage(0)"></div>
+                <div class="dot" onclick="setAniImage(1)"></div>
+                <div class="dot" onclick="setAniImage(2)"></div>
+            </div>
+        </div>
+
+        <!-- Ոջ կողմ (Գոռ) -->
+        <div class="column right">
+            <div class="name">Գոռ</div>
+            <div class="meta">Այգում</div>
+            <div class="dots" id="gor-dots">
+                <div class="dot active" onclick="setGorImage(0)"></div>
+                <div class="dot" onclick="setGorImage(1)"></div>
+                <div class="dot" onclick="setGorImage(2)"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let aniIndex = 0;
+        let gorIndex = 0;
+
+        const aniImages = document.querySelectorAll('#ani-slider img');
+        const aniDots = document.querySelectorAll('#ani-dots .dot');
+
+        const gorImages = document.querySelectorAll('#gor-slider img');
+        const gorDots = document.querySelectorAll('#gor-dots .dot');
+
+        function setAniImage(index) {
+            aniImages[aniIndex].classList.remove('active');
+            aniDots[aniIndex].classList.remove('active');
+            aniIndex = index;
+            aniImages[aniIndex].classList.add('active');
+            aniDots[aniIndex].classList.add('active');
+        }
+
+        function nextAniImage() {
+            let nextIndex = (aniIndex + 1) % aniImages.length;
+            setAniImage(nextIndex);
+        }
+
+        function setGorImage(index) {
+            gorImages[gorIndex].classList.remove('active');
+            gorDots[gorIndex].classList.remove('active');
+            gorIndex = index;
+            gorImages[gorIndex].classList.add('active');
+            gorDots[gorIndex].classList.add('active');
+        }
+
+        function nextGorImage() {
+            let nextIndex = (gorIndex + 1) % gorImages.length;
+            setGorImage(nextIndex);
+        }
+    </script>
+
+</body>
+</html>
