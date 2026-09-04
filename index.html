@@ -30,230 +30,161 @@
             overflow-x: hidden;
         }
 
-        .header {
-            text-align: center;
-            margin-top: 10px;
-            z-index: 2;
-        }
-
-        .subtitle {
-            font-size: 14px;
-            letter-spacing: 6px;
-            color: #a39ca8;
-            text-transform: lowercase;
-            margin-bottom: 12px;
-            font-weight: 300;
-        }
-
-        .main-title {
-            font-size: 28px;
-            font-weight: 400;
-            font-style: italic;
-            color: #f1e7d8;
-            line-height: 1.4;
-            text-shadow: 0 0 12px rgba(255, 230, 200, 0.15);
-        }
-
-        .divider-container {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-        }
-
-        .line {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                rgba(212, 175, 55, 0.3) 30%, 
-                rgba(212, 175, 55, 0.6) 50%, 
-                rgba(212, 175, 55, 0.3) 70%, 
-                transparent 100%);
-        }
-
-        .center-circle {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            background: #120e17;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25), inset 0 0 10px rgba(212, 175, 55, 0.1);
-            color: #d4af37;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .gallery-container {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-            z-index: 2;
-        }
-
-        .slider-box {
-            width: 44%;
-            aspect-ratio: 3/4;
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            cursor: pointer;
-        }
-
-        .slider-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
+        /* Գաղտնաբառի պատուհանի սթայլեր */
+        #pass-screen {
+            position: fixed;
             top: 0;
             left: 0;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            border-radius: 12px;
-        }
-
-        .slider-box img.active {
-            opacity: 1;
-        }
-
-        .bottom-section {
             width: 100%;
-            max-width: 600px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 10px;
-            z-index: 2;
-        }
-
-        .column {
-            flex: 1;
+            height: 100%;
+            background: #0a080d;
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        .name {
-            font-size: 30px;
-            font-weight: 600;
-            margin-bottom: 6px;
+        #pass-screen h2 {
+            font-size: 20px;
+            color: #f1e7d8;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
 
-        .left .name {
-            color: #d4af37;
-        }
-
-        .right .name {
-            color: #d89696;
-        }
-
-        .meta {
-            font-size: 13px;
-            color: #8c8594;
-            letter-spacing: 1px;
+        #pass-input {
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: #18121d;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
             margin-bottom: 15px;
         }
 
-        .dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #3a3342;
+        #pass-btn {
+            padding: 10px 25px;
+            border-radius: 8px;
+            border: none;
+            background: #d4af37;
+            color: #0a080d;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .left .dot.active {
-            background-color: #d4af37;
-            transform: scale(1.3);
+        /* Կայքի հիմնական բովանդակությունը (լռելյայն թաքցված) */
+        #main-content {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
         }
 
-        .right .dot.active {
-            background-color: #d89696;
-            transform: scale(1.3);
-        }
+        .header { text-align: center; margin-top: 10px; z-index: 2; }
+        .subtitle { font-size: 14px; letter-spacing: 6px; color: #a39ca8; text-transform: lowercase; margin-bottom: 12px; font-weight: 300; }
+        .main-title { font-size: 28px; font-weight: 400; font-style: italic; color: #f1e7d8; line-height: 1.4; }
+
+        .divider-container { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 2px; display: flex; align-items: center; justify-content: center; z-index: 1; }
+        .line { position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent 0%, rgba(212, 175, 55, 0.3) 30%, rgba(212, 175, 55, 0.6) 50%, rgba(212, 175, 55, 0.3) 70%, transparent 100%); }
+        .center-circle { width: 65px; height: 65px; border-radius: 50%; background: #120e17; border: 1px solid rgba(212, 175, 55, 0.4); display: flex; align-items: center; justify-content: center; z-index: 5; color: #d4af37; font-size: 16px; font-weight: 600; }
+
+        .gallery-container { width: 100%; max-width: 600px; display: flex; justify-content: space-between; align-items: center; margin: 20px 0; z-index: 2; }
+        .slider-box { width: 44%; aspect-ratio: 3/4; position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer; }
+        .slider-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.8s ease-in-out; border-radius: 12px; }
+        .slider-box img.active { opacity: 1; }
+
+        .bottom-section { width: 100%; max-width: 600px; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; z-index: 2; }
+        .column { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .name { font-size: 30px; font-weight: 600; margin-bottom: 6px; }
+        .left .name { color: #d4af37; }
+        .right .name { color: #d89696; }
+        .meta { font-size: 13px; color: #8c8594; letter-spacing: 1px; margin-bottom: 15px; }
+        .dots { display: flex; gap: 6px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background-color: #3a3342; cursor: pointer; }
+        .left .dot.active { background-color: #d4af37; transform: scale(1.3); }
+        .right .dot.active { background-color: #d89696; transform: scale(1.3); }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="subtitle">ը ն տ ա ն ե կ ա ն   ա ր խ ի վ</div>
-        <div class="main-title">փոքրիկ պահեր, մեծ<br>սեր</div>
+    <!-- Գաղտնաբառի մուտքագրման էկրան -->
+    <div id="pass-screen">
+        <h2>Մուտքագրեք գաղտնաբառը</h2>
+        <input type="password" id="pass-input" placeholder="****">
+        <button id="pass-btn" onclick="checkPass()">Մուտք</button>
     </div>
 
-    <div class="divider-container">
-        <div class="line"></div>
-        <div class="center-circle">Ա & Գ</div>
-    </div>
-
-    <div class="gallery-container">
-        <!-- Անիի սլայդեր -->
-        <div class="slider-box" id="ani-slider" onclick="nextAniImage()">
-            <img src="ani.jpeg" class="active" alt="Անի 1">
-            <img src="ani2.jpeg" alt="Անի 2">
-            <img src="ani3.jpeg" alt="Անի 3">
+    <!-- Կայքի հիմնական մասը -->
+    <div id="main-content">
+        <div class="header">
+            <div class="subtitle">ը ն տ ա ն ե կ ա ն   ա ր խ ի վ</div>
+            <div class="main-title">փոքրիկ պահեր, մեծ<br>սեր</div>
         </div>
 
-        <!-- Գոռի սլայդեր -->
-        <div class="slider-box" id="gor-slider" onclick="nextGorImage()">
-            <img src="gor.jpeg" class="active" alt="Գոռ 1">
-            <img src="gor2.jpeg" alt="Գոռ 2">
-            <img src="gor3.jpeg" alt="Գոռ 3">
+        <div class="divider-container">
+            <div class="line"></div>
+            <div class="center-circle">Ա & Գ</div>
         </div>
-    </div>
 
-    <div class="bottom-section">
-        <div class="column left">
-            <div class="name">Անի</div>
-            <div class="meta">ԱՄԱՌ, 2024</div>
-            <div class="dots" id="ani-dots">
-                <div class="dot active" onclick="setAniImage(0)"></div>
-                <div class="dot" onclick="setAniImage(1)"></div>
-                <div class="dot" onclick="setAniImage(2)"></div>
+        <div class="gallery-container">
+            <div class="slider-box" id="ani-slider" onclick="nextAniImage()">
+                <img src="ani.jpeg" class="active" alt="Անի 1">
+                <img src="ani2.jpeg" alt="Անի 2">
+                <img src="ani3.jpeg" alt="Անի 3">
+            </div>
+
+            <div class="slider-box" id="gor-slider" onclick="nextGorImage()">
+                <img src="gor.jpeg" class="active" alt="Գոռ 1">
+                <img src="gor2.jpeg" alt="Գոռ 2">
+                <img src="gor3.jpeg" alt="Գոռ 3">
             </div>
         </div>
 
-        <div class="column right">
-            <div class="name">Գոռ</div>
-            <div class="meta">ՁՄԵՌ, 2024</div>
-            <div class="dots" id="gor-dots">
-                <div class="dot active" onclick="setGorImage(0)"></div>
-                <div class="dot" onclick="setGorImage(1)"></div>
-                <div class="dot" onclick="setGorImage(2)"></div>
+        <div class="bottom-section">
+            <div class="column left">
+                <div class="name">Անի</div>
+                <div class="meta">ԱՄԱՌ, 2024</div>
+                <div class="dots" id="ani-dots">
+                    <div class="dot active" onclick="setAniImage(0)"></div>
+                    <div class="dot" onclick="setAniImage(1)"></div>
+                    <div class="dot" onclick="setAniImage(2)"></div>
+                </div>
+            </div>
+
+            <div class="column right">
+                <div class="name">Գոռ</div>
+                <div class="meta">ՁՄԵՌ, 2024</div>
+                <div class="dots" id="gor-dots">
+                    <div class="dot active" onclick="setGorImage(0)"></div>
+                    <div class="dot" onclick="setGorImage(1)"></div>
+                    <div class="dot" onclick="setGorImage(2)"></div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        function checkPass() {
+            const pass = document.getElementById('pass-input').value;
+            // Գաղտնաբառը դրված է 2024
+            if (pass === "2024") {
+                document.getElementById('pass-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'flex';
+            } else {
+                alert("Սխալ գաղտնաբառ");
+            }
+        }
+
         let aniIndex = 0;
         let gorIndex = 0;
 
         const aniImages = document.querySelectorAll('#ani-slider img');
         const aniDots = document.querySelectorAll('#ani-dots .dot');
-
         const gorImages = document.querySelectorAll('#gor-slider img');
         const gorDots = document.querySelectorAll('#gor-dots .dot');
 
